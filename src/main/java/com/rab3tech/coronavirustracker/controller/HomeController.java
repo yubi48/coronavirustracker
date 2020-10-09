@@ -16,7 +16,7 @@ public class HomeController {
 	@Autowired
 	private CoronaVirusDataService coronaVirusDataService;
 	
-	@GetMapping("/")
+	@GetMapping({"/","home"})
 	public String home(Model model) {
 		List<LocationStats> allStats = coronaVirusDataService.getAllStats();
 		int totalCases=allStats.stream().mapToInt(stat -> stat.getLatestTotalCases()).sum();
@@ -26,6 +26,17 @@ public class HomeController {
 		model.addAttribute("totalNewCase",totalNewCases);
 		
 		return "home";
+	}
+	
+	@GetMapping("/death")
+	public String death(Model model) {
+		List<LocationStats> deathSats = coronaVirusDataService.getDeathSat();
+		int totalDeath=deathSats.stream().mapToInt(stat->stat.getLatestTotalCases()).sum();
+		int totalNewDeath = deathSats.stream().mapToInt(stat->stat.getDiffFromPrevDay()).sum();
+		model.addAttribute("totalDeath",totalDeath);
+		model.addAttribute("totalNewDeath",totalNewDeath);
+		model.addAttribute("deathSats",deathSats);
+		return "death";
 	}
 	
 }

@@ -30,23 +30,21 @@
 <body>
 <div class="container">
 
- 
-
 	<h1>Corona Virus Tracker Application</h1>
 	<p>This application lists the current number of cases</p>
 	
 	<div class="jumbotron">
-  <h1 class="display-4" th:text="${#numbers.formatDecimal(totalCases,0,'COMMA',0,'COMMA')}"></h1>
-  <p class="lead">Total Cases Reported as of today!</p>
+  <h1 class="display-4" th:text="${#numbers.formatDecimal(totalDeath,0,'COMMA',0,'COMMA')}"></h1>
+  <p class="lead">Total Death Reported as of today!</p>
   <hr class="my-4">
   <p>
-  <span>New Cases Reported since Yesterday: </span>
-  <span th:text="${#numbers.formatDecimal(totalNewCase,0,'COMMA',0,'COMMA')}"></span>
+  <span>New Death Reported since Yesterday: </span>
+  <span th:text="${#numbers.formatDecimal(totalNewDeath,0,'COMMA',0,'COMMA')}"></span>
   </p>
 </div>
 
 <div class="container">
-	<a href="death"><button type="button" class="btn btn-danger btn-lg">Death</button></a>
+	<a href="home"><button type="button" class="btn btn-danger btn-lg">Infection</button></a>
 </div>
 <hr class="my-4">
 
@@ -56,10 +54,10 @@
 
 			<th>Country</th>
 			<th>State</th>
-			<th>Total Cases</th>
+			<th>Total Death</th>
 			<th>Changes since last day</th>
 		</tr>
-		<tr th:each="locationStat : ${locationStats}">
+		<tr th:each="locationStat : ${deathSats}">
 			<td th:text="${locationStat.country}"></td>
 			<td th:text="${locationStat.state}"></td>
 			<td th:text="${locationStat.latestTotalCases}">0</td>
